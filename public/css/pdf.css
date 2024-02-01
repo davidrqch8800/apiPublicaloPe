@@ -1,0 +1,141 @@
+:root {
+    --cyan: #17a2b8;
+    --yellow: #ffc107;
+    --dark: #212529;
+    --light: #f8f9fa;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+}
+
+.all {
+    /* border: 1px solid #6610f2; */
+    border: 1px solid var(--yellow);
+    border-radius: 0.5rem;
+}
+
+.header {
+    /* background-color: #6610f2; */
+    background-color: var(--yellow);
+}
+
+.data .data-1 {
+    /* background-color: rgba(200,200,200,0.3); */
+    background-color: #dee2e6;
+    /* background-color: var(--gray-200); */
+}
+
+.data .data-2 {
+    /* background-color: #6610f2; */
+    background-color: var(--yellow);
+}
+
+.data .data-3 {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.mx-3 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+}
+
+.my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.px-3 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+.m-3 {
+    margin: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100% !important;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100% !important;
+}
+
+[class^="col"] {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-12 {
+    max-width: calc((12/12)*100%);
+}
+
+.col-8 {
+    max-width: calc((8/12)*100%);
+}
+
+.col-6 {
+    max-width: calc((6/12)*100%);
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}

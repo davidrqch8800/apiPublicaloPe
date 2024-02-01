@@ -7,6 +7,8 @@ use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
 use App\Models\Ticket;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
 
 class RegistrationController extends Controller
 {
@@ -100,13 +102,14 @@ class RegistrationController extends Controller
                 ->with('event')
                 ->with('payment')
                 ->where('id', '=', $id)
-                ->get();
+                ->get()[0];
         } catch (\Throwable $th) {
             // throw $th;
             return "<h1>Venta no econtrada<h1>";
         }
 
-        // return view('registrations.report', compact('data'));
+        return view('registrations.report', compact('data'));
+        
         $pdf = Pdf::loadView('registrations.report', compact('data'));
         return $pdf->stream('sale.pdf');
     }
