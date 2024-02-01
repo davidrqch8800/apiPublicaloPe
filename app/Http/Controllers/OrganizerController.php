@@ -13,7 +13,8 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        //
+        $data = Organizer::all();
+        return response()->json($data);
     }
 
     /**
@@ -29,15 +30,18 @@ class OrganizerController extends Controller
      */
     public function store(StoreOrganizerRequest $request)
     {
-        //
+        $data = Organizer::create($request->all());
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Organizer $organizer)
+    public function show($id)
     {
-        //
+        $data = Organizer::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        return response()->json($data);
     }
 
     /**
@@ -51,16 +55,22 @@ class OrganizerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrganizerRequest $request, Organizer $organizer)
+    public function update(UpdateOrganizerRequest $request, $id)
     {
-        //
+        $data = Organizer::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->update($request->all());
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Organizer $organizer)
+    public function destroy($id)
     {
-        //
+        $data = Organizer::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->delete();
+        return response()->json($data, 204);
     }
 }

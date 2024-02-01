@@ -9,4 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+    protected $messages = [
+        "notFound" => "Can't find that element",
+    ];
 }

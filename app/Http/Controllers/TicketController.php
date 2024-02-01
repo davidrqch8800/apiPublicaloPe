@@ -13,7 +13,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $data = Ticket::all();
+        return response()->json($data);
     }
 
     /**
@@ -29,15 +30,18 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        $data = Ticket::create($request->all());
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+    public function show($id)
     {
-        //
+        $data = Ticket::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        return response()->json($data);
     }
 
     /**
@@ -51,16 +55,22 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketRequest $request, Ticket $ticket)
+    public function update(UpdateTicketRequest $request, $id)
     {
-        //
+        $data = Ticket::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->update($request->all());
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
     {
-        //
+        $data = Ticket::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->delete();
+        return response()->json($data, 204);
     }
 }

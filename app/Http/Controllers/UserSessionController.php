@@ -13,7 +13,8 @@ class UserSessionController extends Controller
      */
     public function index()
     {
-        //
+        $data = UserSession::all();
+        return response()->json($data);
     }
 
     /**
@@ -29,15 +30,18 @@ class UserSessionController extends Controller
      */
     public function store(StoreUserSessionRequest $request)
     {
-        //
+        $data = UserSession::create($request->all());
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserSession $userSession)
+    public function show($id)
     {
-        //
+        $data = UserSession::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        return response()->json($data);
     }
 
     /**
@@ -51,16 +55,22 @@ class UserSessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserSessionRequest $request, UserSession $userSession)
+    public function update(UpdateUserSessionRequest $request, $id)
     {
-        //
+        $data = UserSession::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->update($request->all());
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserSession $userSession)
+    public function destroy($id)
     {
-        //
+        $data = UserSession::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->delete();
+        return response()->json($data, 204);
     }
 }

@@ -13,7 +13,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Permission::all();
+        return response()->json($data);
     }
 
     /**
@@ -29,15 +30,18 @@ class PermissionController extends Controller
      */
     public function store(StorePermissionRequest $request)
     {
-        //
+        $data = Permission::create($request->all());
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Permission $permission)
+    public function show($id)
     {
-        //
+        $data = Permission::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        return response()->json($data);
     }
 
     /**
@@ -51,16 +55,22 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePermissionRequest $request, Permission $permission)
+    public function update(UpdatePermissionRequest $request, $id)
     {
-        //
+        $data = Permission::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->update($request->all());
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        //
+        $data = Permission::find($id);
+        if (!$data) return response()->json(['message' => $this->messages["notFound"]], 404);
+        $data->delete();
+        return response()->json($data, 204);
     }
 }
