@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\ApiResponse;
 use App\Models\Role;
+use Exception;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 
@@ -14,6 +16,13 @@ class RoleController extends Controller
     public function index()
     {
         //
+        try{
+            $roles = Role::all();
+            return ApiResponse::success('Lista de Roles', 200, $roles);
+            // throw new Exception("Error papito");
+        } catch(Exception $e){
+            return ApiResponse::error('Error al obtener la lista de roles: '.$e->getMessage(), 500);
+        }
     }
 
     /**
@@ -22,6 +31,7 @@ class RoleController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
